@@ -346,6 +346,21 @@
 
     .project-card:hover .project-icon { filter: grayscale(0); }
 
+    .project-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.4) brightness(0.7);
+      transition: filter 0.5s;
+      z-index: 0;
+    }
+
+    .project-card:hover .project-img {
+      filter: grayscale(0.1) brightness(0.85);
+    }
+
     .project-num {
       position: absolute;
       top: 1rem;
@@ -814,12 +829,13 @@
     // ── PROJECT DATA (edit this array to add/remove projects) ──
     const PROJECTS = [
       {
-        name: "Kapture",
-        subtitle: "Photo → DXF / G-Code Converter",
-        icon: "📸",
+        name: "CNC Plasma",
+        subtitle: "Machine CNC plasma 1250×850mm — construite de A à Z",
+        icon: "🔥",
+        image: "assets/plasma_result.jpg",
         description:
-          "Application web industrielle transformant une simple photo de pièce mécanique en fichier DXF/G-Code prêt pour découpe CNC plasma. Détection automatique de feuille A4, correction de perspective par homographie, squelettisation Zhang-Suen, et export avec compensation de kerf et amorces plasma.",
-        tags: ["Python", "Flask", "OpenCV", "NumPy", "Shapely", "ezdxf", "HTML5 Canvas", "Tailwind CSS"],
+          "Construction complète d'une CNC plasma industrielle : structure acier + profilés aluminium (80×40mm), motorisation Nema23 sur drivers DM432C, transmission crémaillère M1 (Y), courroie (X), vis à billes (Z). Contrôle via carte 5 axes Mach3, torche Stamos 85A CNC avec THC AqTronic JetCut pour le contrôle dynamique de hauteur. Pilotage intégré à l'écosystème Kloud/Kapture.",
+        tags: ["Mach3", "LinuxCNC", "Nema23", "DM432C", "THC", "G-Code", "Fusion 360", "Stamos 85A"],
         github: "https://github.com/Daubet",
         demo: null,
       },
@@ -827,6 +843,7 @@
         name: "Kulture",
         subtitle: "IDE No-Code ISOBUS — ISO 11783-6",
         icon: "🚜",
+        image: "assets/kulture_screen.png",
         description:
           "Environnement de développement web pour concevoir visuellement des interfaces de terminaux virtuels ISOBUS agricoles. Génération automatique du firmware ESP32 complet (Object Pool binaire + C++) et flashage direct depuis le navigateur via Web Serial API. 16 types de composants, data binding J1939, moteur logique no-code.",
         tags: ["Python", "Flask", "Fabric.js", "ESP-IDF", "FreeRTOS", "AgIsoStack++", "PlatformIO", "Web Serial API", "ISO 11783-6", "J1939"],
@@ -834,12 +851,13 @@
         demo: null,
       },
       {
-        name: "Kloud",
-        subtitle: "Remote CNC Plasma Control Platform",
-        icon: "☁️",
+        name: "Kapture",
+        subtitle: "Photo → DXF / G-Code Converter",
+        icon: "📸",
+        image: "assets/kapture_screen.png",
         description:
-          "Plateforme de pilotage à distance d'une CNC plasma industrielle. Un Raspberry Pi embarqué sur la machine expose un bureau distant via noVNC, accessible depuis une interface web via tunnel VPN sécurisé Tailscale. Chargement G-code, lancement de découpe et monitoring en temps réel — chiffré bout en bout.",
-        tags: ["Raspberry Pi", "Tailscale", "noVNC", "WebSocket", "React", "Node.js", "Docker", "JWT", "LinuxCNC"],
+          "Application web industrielle transformant une simple photo de pièce mécanique en fichier DXF/G-Code prêt pour découpe CNC plasma. Détection automatique de feuille A4, correction de perspective par homographie, squelettisation Zhang-Suen, et export avec compensation de kerf et amorces plasma.",
+        tags: ["Python", "Flask", "OpenCV", "NumPy", "Shapely", "ezdxf", "HTML5 Canvas", "Tailwind CSS"],
         github: "https://github.com/Daubet",
         demo: null,
       },
@@ -847,9 +865,32 @@
         name: "SolarPulse MPPT",
         subtitle: "Régulateur de charge solaire 80V→12V",
         icon: "⚡",
+        image: "assets/solar_orcad.png",
         description:
           "Système de gestion d'énergie solaire full-stack : convertisseur Buck synchrone haute fréquence (100kHz) avec algorithme MPPT Perturb & Observe, sensing de précision (ampli-op différentiel), télémétrie IoT vers dashboard web Flask. Conçu, simulé (OrCAD/PSpice) et assemblé en Manhattan Style.",
         tags: ["ESP32", "C++", "OrCAD", "PSpice", "IR2110", "MOSFET", "Flask", "Docker", "MPPT"],
+        github: "https://github.com/Daubet",
+        demo: null,
+      },
+      {
+        name: "KKKasino — VFD",
+        subtitle: "Pilotage de tubes IV-11 soviétiques — Machine à sous connectée",
+        icon: "🎰",
+        image: "assets/vfd_tube.jpg",
+        description:
+          "Conception du système d'affichage d'une machine à sous hybride : pilotage de 4 tubes à fluorescence sous vide IV-11 (soviétiques, années 70) via drivers MIC5891YN en daisy-chain SPI. Double rail d'alimentation (boost 20-25V anodes, buck 1.5V filaments). PCB routé sous OrCAD, intégré à une architecture Arduino Nano + Godot Engine via UART.",
+        tags: ["OrCAD", "Arduino Nano", "MIC5891", "SPI", "IV-11", "Boost Converter", "Buck Converter", "Godot", "UART"],
+        github: "https://github.com/Daubet",
+        demo: null,
+      },
+      {
+        name: "Kloud",
+        subtitle: "Remote CNC Plasma Control Platform",
+        icon: "☁️",
+        image: "assets/kloud_novnc.png",
+        description:
+          "Plateforme de pilotage à distance d'une CNC plasma industrielle. Un Raspberry Pi embarqué sur la machine expose un bureau distant via noVNC, accessible depuis une interface web via tunnel VPN sécurisé Tailscale. Chargement G-code, lancement de découpe et monitoring en temps réel — chiffré bout en bout.",
+        tags: ["Raspberry Pi", "Tailscale", "noVNC", "WebSocket", "React", "Node.js", "Docker", "JWT", "LinuxCNC"],
         github: "https://github.com/Daubet",
         demo: null,
       },
@@ -898,7 +939,10 @@
       card.innerHTML = `
         <div class="project-visual">
           <span class="project-num">${String(i + 1).padStart(2, "0")}</span>
-          <span class="project-icon">${p.icon}</span>
+          ${p.image
+            ? `<img src="${p.image}" alt="${p.name}" class="project-img">`
+            : `<span class="project-icon">${p.icon}</span>`
+          }
         </div>
         <div class="project-info">
           <h3 class="project-name">${p.name}</h3>
